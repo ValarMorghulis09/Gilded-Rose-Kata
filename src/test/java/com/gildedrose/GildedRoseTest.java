@@ -2,21 +2,56 @@ package com.gildedrose;
 
 import com.gildedrose.item.Item;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GildedRoseTest {
 
+   private static Item[] fetchItemsWithZeroQuantity(){
+        return new Item[]{
+            new Item("Conjured", 10, 0),
+            new Item("Sulfuras, Hand of Ragnaros", 20, 0),
+            new Item("Backstage passes to a TAFKAL80ETC concert", -1, 0),
+            new Item("Default",1,0) };
+    }
+
+    private static Item[] fetchItemsWithQuantityAlwaysMoreThanZero(){
+        return new Item[]{
+            new Item("Aged Brie", 10, 2),
+            new Item("Backstage passes to a TAFKAL80ETC concert", 10, 1)
+        };
+    }
+
     @Test
-    void foo() {
+    void checkItemToStringFunction() {
         Item[] items = new Item[] { new Item("default", 0, 0) };
         GildedRose app = new GildedRose(items);
         app.updateQuality();
         assertEquals("default", app.items[0].name);
         assertEquals("default, -1, 0",app.items[0].toString());
+    }
+
+    @ParameterizedTest
+    @MethodSource("fetchItemsWithZeroQuantity")
+    public void testQualityWithZeroQuantity(Item item){
+        Item[] items = new Item[] { item };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(item.name+", "+item.sellIn+", "+ item.quality,app.items[0].toString());
+        assertEquals(0,item.quality);
+    }
+
+    @ParameterizedTest
+    @MethodSource("fetchItemsWithQuantityAlwaysMoreThanZero")
+    public void testQualityIncreaseWhenItsAfterSellIn(Item item){
+        Item[] items = new Item[] { item };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(item.name+", "+item.sellIn+", "+ item.quality,app.items[0].toString());
+        assertEquals(3,item.quality);
     }
 
 
