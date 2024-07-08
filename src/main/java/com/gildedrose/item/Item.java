@@ -1,4 +1,4 @@
-package com.gildedrose;
+package com.gildedrose.item;
 
 public class Item {
 
@@ -8,6 +8,12 @@ public class Item {
 
     public int quality;
 
+    /**
+     * Create Item
+     * @param name item name
+     * @param sellIn denotes the number of days we have to sell the items
+     * @param quality denotes how valuable the item is
+     */
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
