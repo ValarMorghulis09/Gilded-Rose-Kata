@@ -10,10 +10,11 @@ public class DefaultItem  extends AbstractItem {
      * @param item
      */
     public void update(Item item) {
-        decreaseQuality(item,1);
+        int decreaseQualityNumberOfTimes = item.sellIn < 0 ? 2 : 1;
         decreaseSellIn(item);
-        if (item.sellIn < 0) {
-            decreaseQuality(item,1);
+        while (decreaseQualityNumberOfTimes > 0) {
+            decreaseQuality(item);
+            decreaseQualityNumberOfTimes--;
         }
     }
 }

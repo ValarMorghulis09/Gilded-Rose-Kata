@@ -12,12 +12,10 @@ public class BackstagePassItem extends AbstractItem {
      * @param item
      */
     public void update(Item item) {
-        increaseQuality(item,1);
-        if (item.sellIn < 11) {
-            increaseQuality(item,1);
-        }
-        if (item.sellIn < 6) {
-            increaseQuality(item,1);
+        int increaseBy =   item.sellIn <= 5 ? 3 : item.sellIn <= 10 ? 2 : 1;
+        while (increaseBy > 0){
+            increaseQuality(item);
+            increaseBy--;
         }
         decreaseSellIn(item);
         if (item.sellIn < 0) {

@@ -11,9 +11,6 @@ class GildedRose {
         this.items = items;
     }
 
-    /**
-     * This function is used to update the items we have in our storage on daily basis
-     */
     public void updateQuality() {
         for (Item item : items) {
             AbstractItem currentItem = ItemFactory.getItems(item);

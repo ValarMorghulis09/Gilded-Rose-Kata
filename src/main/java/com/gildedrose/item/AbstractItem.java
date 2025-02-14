@@ -7,30 +7,22 @@ public abstract class AbstractItem {
 
     /**
      *
-     * @param item
-     * @param numberOfTimes The number of times of repeating the increase operation
+     * @param item Item
      */
-    protected void increaseQuality(Item item,Integer numberOfTimes) {
-        while (numberOfTimes > 0) {
-            if (item.quality < MAX_QUALITY) {
-                item.quality++;
-            }
-            numberOfTimes--;
+    protected void increaseQuality(Item item) {
+        if(item.quality < MAX_QUALITY) {
+            item.quality++;
         }
     }
 
     /**
      *
      * @param item Item
-     * @param numberOfTimes The number of times of repeating the decrease operation
      */
-    protected void decreaseQuality(Item item,Integer numberOfTimes) {
-       while(numberOfTimes > 0){
-           if (item.quality > MIN_QUALITY) {
-               item.quality--;
-           }
-           numberOfTimes--;
-       }
+    protected void decreaseQuality(Item item) {
+        if(item.quality > MIN_QUALITY) {
+            item.quality--;
+        }
     }
 
     protected void decreaseSellIn(Item item) {

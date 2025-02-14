@@ -12,10 +12,10 @@ public class AgedBrieItem extends AbstractItem {
      * @param item
      */
     public void update(Item item) {
-        increaseQuality(item,1);
+        increaseQuality(item);
         decreaseSellIn(item);
         if (item.sellIn < 0) {
-            increaseQuality(item,1);
+            increaseQuality(item);
         }
     }
 }

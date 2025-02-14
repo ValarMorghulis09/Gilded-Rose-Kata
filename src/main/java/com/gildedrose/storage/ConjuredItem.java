@@ -7,13 +7,15 @@ public class ConjuredItem extends AbstractItem {
 
     /**
      * "Conjured" items degrade in Quality twice as fast as normal items
+     *
      * @param item
      */
     public void update(Item item) {
-        decreaseQuality(item,2);
+        int decreaseQualityNumberOfTimes = item.sellIn < 0 ? 4 : 2;
         decreaseSellIn(item);
-        if (item.sellIn < 0) {
-            decreaseQuality(item,2);
+        while (decreaseQualityNumberOfTimes > 0) {
+            decreaseQuality(item);
+            decreaseQualityNumberOfTimes--;
         }
     }
 }
